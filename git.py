@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 # ===========================================
-# Utilitários de config.ini teste
+# Utilitários de config.ini
 # ===========================================
 def carregar_config(caminho_config="config.ini"):
     """Lê as configurações do arquivo .ini (caso exista)."""
@@ -28,10 +28,10 @@ def salvar_config(config, caminho_config="config.ini"):
         with open(gitignore_path, 'r+', encoding='utf-8') as f:
             linhas = f.read().splitlines()
             if 'config.ini' not in linhas:
-                f.write('\nconfig.ini\n')
+                f.write('\nconfig.ini\n.gitignore\n')
     else:
         with open(gitignore_path, 'w', encoding='utf-8') as f:
-            f.write('config.ini\n')
+            f.write('config.ini\n.gitignore\n')
 
 # ===========================================
 # Funções Git
