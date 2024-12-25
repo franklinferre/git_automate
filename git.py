@@ -41,7 +41,7 @@ def git_init(caminho_projeto):
     subprocess.run(["git", "init"], cwd=caminho_projeto, check=True)
     print(f"[OK] Repositório Git inicializado em {caminho_projeto}")
 
-def git_connect(caminho_projeto, url_remota, branch="master"):
+def git_connect(caminho_projeto, url_remota, branch="main"):
     if not os.path.isdir(os.path.join(caminho_projeto, ".git")):
         git_init(caminho_projeto)
 
@@ -122,7 +122,7 @@ def git_clone(url_remota, caminho_destino="."):
 # Função pushall (add + commit + push)
 # ===========================================
 def git_pushall(caminho_projeto, mensagem, config):
-    branch_config = config.get('git', 'branch', fallback='master')
+    branch_config = config.get('git', 'branch', fallback='main')
     git_add(caminho_projeto)
     git_commit(caminho_projeto, mensagem)
     git_pull(caminho_projeto, branch=branch_config)
