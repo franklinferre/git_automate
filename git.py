@@ -32,7 +32,9 @@ def salvar_config(config, caminho_config="config.ini"):
     else:
         with open(gitignore_path, 'w', encoding='utf-8') as f:
             f.write('config.ini\n.gitignore\n')
-
+            
+    # Remove config.ini do índice do Git
+    subprocess.run(["git", "rm", "-r", "--cached", "."], check=True)
 # ===========================================
 # Funções Git
 # ===========================================
