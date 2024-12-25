@@ -22,6 +22,17 @@ def salvar_config(config, caminho_config="config.ini"):
     with open(caminho_config, 'w', encoding='utf-8') as f:
         config.write(f)
 
+    # Adicionar 'config.ini' ao .gitignore, se ainda não existir
+    gitignore_path = os.path.join(os.path.dirname(caminho_config), '.gitignore')
+    if os.path.exists(gitignore_path):
+        with open(gitignore_path, 'r+', encoding='utf-8') as f:
+            linhas = f.read().splitlines()
+            if 'config.ini' not in linhas:
+                f.write('\nconfig.ini\n')
+    else:
+        with open(gitignore_path, 'w', encoding='utf-8') as f:
+            f.write('config.ini\n')
+
 # ===========================================
 # Funções Git
 # ===========================================
@@ -111,23 +122,10 @@ def git_clone(url_remota, caminho_destino="."):
 # Função pushall (add + commit + push)
 # ===========================================
 def git_pushall(caminho_projeto, mensagem, config):
-    """
-    Faz 'git add .', 'git commit -m "<mensagem>"' e 'git push -u origin <branch>'.
-    Lê a branch do config.ini (se existir), ou usa 'master'.
-    """
-    # Adicionar
+    branch_config = config.get('git', 'branch', fallback='master')
     git_add(caminho_projeto)
-    # Commit
     git_commit(caminho_projeto, mensagem)
-
-    # Pegar branch do config.ini, se houver
-    branch_config = "master"
-    if "git" in config and "branch" in config["git"]:
-        branch_config = config["git"]["branch"]
-    # Puxar mudanças remotas antes de fazer o push
     git_pull(caminho_projeto, branch=branch_config)
-
-    # Push
     git_push(caminho_projeto, branch=branch_config)
 
 # ===========================================
