@@ -37,8 +37,10 @@ def salvar_config(config, caminho_config="config.ini"):
     if os.path.isdir(".git"):
         result = subprocess.run(["git", "ls-files"], capture_output=True, text=True)
         if result.stdout.strip():
-            # Remove config.ini do índice do Git
-            subprocess.run(["git", "rm", "-r", "--cached", "config.ini"], check=True)
+            # Verifica se config.ini está sendo rastreado pelo Git
+            if "config.ini" in result.stdout:
+                # Remove config.ini do índice do Git
+                subprocess.run(["git", "rm", "-r", "--cached", "config.ini"], check=True)
 
 # ===========================================
 # Funções Git
