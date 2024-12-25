@@ -28,19 +28,21 @@ def salvar_config(config, caminho_config="config.ini"):
         with open(gitignore_path, 'r+', encoding='utf-8') as f:
             linhas = f.read().splitlines()
             if 'config.ini' not in linhas:
-                f.write('\nconfig.ini\n.gitignore\n')
+                f.write('\nconfig.ini\n.gitignore\ngit.py\n')
     else:
         with open(gitignore_path, 'w', encoding='utf-8') as f:
-            f.write('config.ini\n.gitignore\n')
+            f.write('config.ini\n.gitignore\ngit.py\n')
 
-    # Verifica se o repositório Git está inicializado e se há arquivos rastreados
+    # Verifica se o repositório Git está inicializado e se há arquivos rastreados teste
     if os.path.isdir(".git"):
         result = subprocess.run(["git", "ls-files"], capture_output=True, text=True)
         if result.stdout.strip():
             # Verifica se config.ini está sendo rastreado pelo Git
             if "config.ini" in result.stdout:
                 # Remove config.ini do índice do Git
+                subprocess.run(["git", "rm", "-r", "--cached", "git.py"], check=True)
                 subprocess.run(["git", "rm", "-r", "--cached", "config.ini"], check=True)
+                subprocess.run(["git", "rm", "-r", "--cached", ".gitignore"], check=True)
 
 # ===========================================
 # Funções Git
