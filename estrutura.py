@@ -28,6 +28,7 @@ if __name__ == "__main__":
 CONTEUDO_REQUIREMENTS = """pymongo
 requests
 cryptography
+SQLAlchemy
 """
 
 def criar_arquivo(caminho_arquivo):
