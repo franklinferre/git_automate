@@ -69,7 +69,15 @@ def git_add(caminho_projeto):
     print("[OK] Arquivos adicionados ao stage.")
 
 def git_commit(caminho_projeto, mensagem="Update"):
-    """Faz commit (git commit -m "...")."""
+    # Verifica se há algo para commitar
+    status_result = subprocess.run(
+        ["git", "status", "--porcelain"],
+        cwd=caminho_projeto, capture_output=True, text=True
+    )
+    if not status_result.stdout.strip():
+        print("[OK] Nada para commitar.")
+        return
+
     subprocess.run(["git", "commit", "-m", mensagem], cwd=caminho_projeto, check=True)
     print(f"[OK] Commit realizado: {mensagem}")
 
