@@ -127,9 +127,9 @@ def git_clone(url_remota, caminho_destino="."):
     print(f"[OK] Repositório clonado de {url_remota} para {caminho_destino}")
 
 # ===========================================
-# Função pushall (add + commit + push)
+# Função pushfull (add + commit + push)
 # ===========================================
-def git_pushall(caminho_projeto, mensagem, config):
+def git_pushfull(caminho_projeto, mensagem, config):
     branch_config = config.get('git', 'branch', fallback='main')
     git_add(caminho_projeto)
     git_commit(caminho_projeto, mensagem)
@@ -221,7 +221,7 @@ def git_config_interativo(args, caminho_config="config.ini"):
 # ===========================================
 def main():
     parser = argparse.ArgumentParser(
-        description="Gerenciador de comandos Git via Python, incluindo 'pushall' e 'config' que conecta."
+        description="Gerenciador de comandos Git via Python, incluindo 'pushfull' e 'config' que conecta."
     )
     subparsers = parser.add_subparsers(dest="acao", help="Escolha qual subcomando executar.")
 
@@ -285,15 +285,15 @@ def main():
     p_conf.add_argument("--token", help="Token ou senha (cuidado!).")
     p_conf.add_argument("--caminho", default=".", help="Caminho do repositório local (padrão: .)")
 
-    # Subcomando pushall
-    p_pushall = subparsers.add_parser("pushall", help="Adiciona, comita e faz push de uma só vez.")
-    p_pushall.add_argument("--caminho", default=".", help="Caminho do repositório local.")
-    p_pushall.add_argument("--mensagem", "-m", default="Update", help="Mensagem do commit (padrão: 'Update').")
+    # Subcomando pushfull
+    p_pushfull = subparsers.add_parser("pushfull", help="Adiciona, comita e faz push de uma só vez.")
+    p_pushfull.add_argument("--caminho", default=".", help="Caminho do repositório local.")
+    p_pushfull.add_argument("--mensagem", "-m", default="Update", help="Mensagem do commit (padrão: 'Update').")
 
     # Processa argumentos
     args = parser.parse_args()
 
-    # Carrega config.ini (usado no pushall e no conectar se faltar --url)
+    # Carrega config.ini (usado no pushfull e no conectar se faltar --url)
     config = carregar_config()
 
     # Despacha subcomandos
@@ -337,8 +337,8 @@ def main():
     elif args.acao == "config":
         git_config_interativo(args)
 
-    elif args.acao == "pushall":
-        git_pushall(args.caminho, args.mensagem, config)
+    elif args.acao == "pushfull":
+        git_pushfull(args.caminho, args.mensagem, config)
 
     else:
         parser.print_help()
