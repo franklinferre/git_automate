@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 # ===========================================
-# Utilitários de config.ini
+# Utilitários de config.ini teste
 # ===========================================
 def carregar_config(caminho_config="config.ini"):
     """Lê as configurações do arquivo .ini (caso exista)."""
