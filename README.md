@@ -3,7 +3,7 @@
 
 Este projeto fornece uma interface de linha de comando para gerenciar repositórios Git utilizando Python. Ele inclui funcionalidades para inicializar repositórios, conectar a repositórios remotos, adicionar arquivos, fazer commits, push, pull, e muito mais.
 
-A ideia é facilitar dentro do VScode com um "git.py pushall"
+A ideia é facilitar dentro do VScode com um "git.py pushfull"
 ## Funcionalidades
 
 - Inicializar repositório Git (`git init`)
@@ -18,7 +18,7 @@ A ideia é facilitar dentro do VScode com um "git.py pushall"
 - Mostrar diferenças (`git diff`)
 - Clonar repositório (`git clone`)
 - Configuração interativa (`git config`)
-- Adicionar, comitar e fazer push de uma só vez (`git pushall`)
+- Adicionar, comitar e fazer push de uma só vez (`git pushfull`)
 
 ## Como Usar
 
@@ -97,7 +97,7 @@ python git.py config --caminho /caminho/do/projeto
 ### Adicionar, Comitar e Fazer Push de uma Só Vez
 
 ```sh
-python git.py pushall --caminho /caminho/do/projeto --mensagem "Mensagem do commit"
+python git.py pushfull --caminho /caminho/do/projeto --mensagem "Mensagem do commit"
 ```
 
 ## Requisitos
